@@ -23,11 +23,11 @@ const PageviewsCountText = Styled.p`
 const PageviewsCount = ({ Count }) => {
   return (
     <PageviewsCountParent>
-      {parseInt(Count) >= 1 && parseInt(Count) < 30 ? <PageviewsCountText>10K</PageviewsCountText> : ""}
-      {parseInt(Count) >= 30 && parseInt(Count) < 50 ? <PageviewsCountText>50K</PageviewsCountText> : ""}
-      {parseInt(Count) >= 50 && parseInt(Count) < 80 ? <PageviewsCountText>100K</PageviewsCountText> : ""}
-      {parseInt(Count) >= 80 && parseInt(Count) < 100 ? <PageviewsCountText>500K</PageviewsCountText> : ""}
-      {parseInt(Count) === 100 ? <PageviewsCountText>1M</PageviewsCountText> : ""}
+      {parseInt(Count) == 0 ? <PageviewsCountText>10K</PageviewsCountText> : ""}
+      {parseInt(Count) == 1 ? <PageviewsCountText>50K</PageviewsCountText> : ""}
+      {parseInt(Count) == 2 ? <PageviewsCountText>100K</PageviewsCountText> : ""}
+      {parseInt(Count) == 3 ? <PageviewsCountText>500K</PageviewsCountText> : ""}
+      {parseInt(Count) == 4 ? <PageviewsCountText>1M</PageviewsCountText> : ""}
       <PageviewsCountText style={{ marginLeft: "0.2em" }}>PAGEVIEWS</PageviewsCountText>
     </PageviewsCountParent>
   );
@@ -53,11 +53,11 @@ const BillingCount = ({ Count }) => {
   return (
     <div>
       <BillingTextParent>
-        {parseInt(Count) >= 1 && parseInt(Count) < 30 ? <BillingText>$8</BillingText> : ""}
-        {parseInt(Count) >= 30 && parseInt(Count) < 50 ? <BillingText>$12</BillingText> : ""}
-        {parseInt(Count) >= 50 && parseInt(Count) < 80 ? <BillingText>$16</BillingText> : ""}
-        {parseInt(Count) >= 80 && parseInt(Count) < 100 ? <BillingText>$24</BillingText> : ""}
-        {parseInt(Count) === 100 ? <BillingText>$36</BillingText> : ""}
+        {parseInt(Count) == 0 ? <BillingText>$8</BillingText> : ""}
+        {parseInt(Count) == 1 ? <BillingText>$12</BillingText> : ""}
+        {parseInt(Count) == 2 ? <BillingText>$16</BillingText> : ""}
+        {parseInt(Count) == 3 ? <BillingText>$24</BillingText> : ""}
+        {parseInt(Count) == 4 ? <BillingText>$36</BillingText> : ""}
         <BillingText Month style={{ marginLeft: "0.5em" }}>/ month</BillingText>
       </BillingTextParent>
     </div>
@@ -120,7 +120,7 @@ const Input = ({ SetpageView, Pageviews }) => {
   const Ref = useRef();
   useEffect(() => {
     console.log(Pageviews);
-    Ref.current.style.background = `linear-gradient(to right, hsl(174, 77%, 80%) 0%, hsl(174, 77%, 80%) ${Pageviews}%, hsl(224, 65%, 95%) ${Pageviews}%, hsl(224, 65%, 95%) 100%)`;
+    Ref.current.style.background = `linear-gradient(to right, hsl(174, 77%, 80%) 0%, hsl(174, 77%, 80%) ${Pageviews * 25}%, hsl(224, 65%, 95%) ${Pageviews * 25}%, hsl(224, 65%, 95%) 100%)`;
   });
   const handleInput = (e) => {
     SetpageView(e.target.value);
@@ -131,8 +131,9 @@ const Input = ({ SetpageView, Pageviews }) => {
         ref={Ref}
         onInput={handleInput}
         type="range"
-        min="1"
-        max="100"
+        min="0"
+        max="4"
+        // step={"20"}
         value={Pageviews}
       />
     </InputParent>
@@ -347,7 +348,7 @@ const Divider = Styled.div `
 `
 
 const Card = () => {
-  const [pageViews, setPageView] = useState("1");
+  const [pageViews, setPageView] = useState("0");
   return (
     <Wrapper>
       <Pageviews>
