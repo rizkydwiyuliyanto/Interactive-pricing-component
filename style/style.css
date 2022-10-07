@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Manrope-Bold";
+    src: local("Manrope-Bold"),
+    url("../src/fonts/Manrope/Manrope-Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+
+
+.fs-family{
+    font-family: "Manrope-Bold";
+    border: 1px solid red;
+}
+
+.mycontainer {
+    max-width: 1440px;
+    margin: 0 auto;
+    border: 2px solid red;
+}
